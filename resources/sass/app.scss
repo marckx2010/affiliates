@@ -1,0 +1,14 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// importing core styling file
+@import "./font-awesome/fontawesome.scss";
+
+// our project needs Solid + Brands
+@import "./font-awesome/solid.scss";
+@import "./font-awesome/brands.scss";
+
+
