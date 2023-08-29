@@ -16,7 +16,7 @@ class Affiliate
     public function __construct()
     {
         // NB: single place this is defined throughout application
-        $this->homeOfficeCoordinate = (object)['latitude' => 53.3340285, 'longitude' => -6.2535495];
+        $this->homeOfficeCoordinate = (object)['latitude' => 52.6638, 'longitude' => -8.6267];
         $this->homeOfficeLatLng = $this->makeLatLng($this->homeOfficeCoordinate);
     }
 

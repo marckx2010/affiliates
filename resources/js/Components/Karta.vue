@@ -3,8 +3,8 @@ import {onMounted, PropType, watch, ref} from "vue";
 import {useStore} from "vuex";
 
 import shamrock from '@/assets/images/shamrock256.png'
-import miniIcon from '@/assets/images/minig.png'
-import miniLogo from '@/assets/images/gambling_mini.png'
+import miniIcon from '@/assets/images/andandand1000.jpg'
+import miniLogo from '@/assets/images/share_and_and.png'
 
 const props = defineProps({
     radius: {type: Number as PropType<number>, default: 100},
@@ -53,7 +53,7 @@ onMounted(() => {
             popupAnchor: [20, 10]
         })
     }).addTo(map)
-        .bindPopup('<img alt="mini logo" src=' + miniLogo + ' style="background-color: pink; padding: 2px; height: 30px"><br/>Home office of<br/> Gambling.com in Dublin!');
+        .bindPopup('<img alt="mini logo" src=' + miniLogo + ' style="background-color: pink; padding: 2px; height: 30px"><br/>Home office of<br/> And And! And in Dublin!');
 
     function addMarkers(radius) {
         // a marker for everyone
