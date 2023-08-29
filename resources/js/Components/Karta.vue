@@ -53,7 +53,7 @@ onMounted(() => {
             popupAnchor: [20, 10]
         })
     }).addTo(map)
-        .bindPopup('<img alt="mini logo" src=' + miniLogo + ' style="background-color: pink; padding: 2px; height: 30px"><br/>Home office of<br/> And And! And in Dublin!');
+        .bindPopup('<img alt="mini logo" src=' + miniLogo + ' style="background-color: pink; padding: 2px; height: 30px"><br/>Home office of<br/> And And! And in Limerick!');
 
     function addMarkers(radius) {
         // a marker for everyone

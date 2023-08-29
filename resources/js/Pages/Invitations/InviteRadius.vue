@@ -13,7 +13,7 @@ const emit = defineEmits(['changed-radius']);
 let radius = ref(props.radius)
 
 const cardTitle = 'Who shall we invite?';
-const cardSubTitle = 'Select' + ' a radius in kilometers from our Dublin, Ireland Office';
+const cardSubTitle = 'Select' + ' a radius in kilometers from our Limerick, Ireland Office';
 const defaultRadius = 100
 const maxRadius = 200
 const tickStep = 50
