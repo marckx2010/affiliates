@@ -11,6 +11,8 @@ and eventually wrote my first article on my site at: https://marckx.tech/article
 As I wrote, there are many better alternatives to accomplishing this now (even then). But if all you've got is
 Laravel/Symfony and you have a task that runs every minute yet takes more than a minute to run, this worked nicely!
 
+ETA: You may need need to get Mapbox credentials to place in the .env file. I reckon it used open source yet haven't yet checked.
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
