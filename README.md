@@ -1,3 +1,15 @@
+<h3>Open source addendum (March 2024)</h3>
+The code challenge / test was pretty basic. Read some data and produce an HTML table. I was tempted to just retool 
+another coding test that read some data and produced - well at least a nice Rappaport Livewire table.
+
+More on this on my website at: https://marckx.tech/about/apps/affiliates
+
+Also worthy of mention is during my conversation with this company's VP - I mentioned how I was able to leverage
+some Symfony code to effectively multi-task in PHP. He told me that was not possible. I sent him some code snippets
+and eventually wrote my first article on my site at: https://marckx.tech/articles/multitasking
+
+As I wrote, there are many better alternatives to accomplishing this now (even then). But if all you've got is
+Laravel/Symfony and you have a task that runs every minute yet takes more than a minute to run, this worked nicely!
 
 <!-- PROJECT LOGO -->
 <br />
