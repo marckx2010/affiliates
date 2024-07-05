@@ -35,7 +35,7 @@ const emit = defineEmits(['change-value'])
 
 <style scoped lang="scss">
 // Tick width & range thumb width need to be in sync
-$radiusRangeWidth: 22.5vh;
+$radiusRangeWidth: 380px;
 $unit: 75px;
 
 $radiusInputWidth: 80px;
@@ -44,7 +44,7 @@ $leftPad: $radiusInputWidth + 10;
 .radius-range {
     position: relative;
     top: -15px;
-    width: $radiusRangeWidth;
+    width: $radiusRangeWidth - $radiusInputWidth;
 }
 
 .radiusInput {
