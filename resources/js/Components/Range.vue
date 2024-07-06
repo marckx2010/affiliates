@@ -11,7 +11,8 @@ const props = defineProps({
 
 let value = ref(props.default.valueOf())
 
-let tickMarks = []
+let tickMarks: any;
+tickMarks = [];
 for (let x = props.min; x <= props.max; x += props.tickStep) {
     tickMarks.push(x);
 }

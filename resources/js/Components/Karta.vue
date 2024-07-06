@@ -16,12 +16,25 @@ let circle;
 
 let reactiveRadius = ref(props.radius)
 
+let initialZoom = 8;
+
 // function onMounted(callback: () => void): void
+
+// try and set a reasonable view depending on window width
+function setInitialZoom(): number {
+    let windowWidth = ref(window.innerWidth)
+    if (windowWidth.value < 550) return 4
+    if (windowWidth.value >= 550 && windowWidth.value < 1200) return 6
+    if (windowWidth.value >= 1200) return 8
+    return 8
+}
 
 onMounted(() => {
     const store = useStore()
     const affiliates = store.getters['getAffiliates']
     const centerHome = store.getters['getHomeOfficeLatLng']
+
+    initialZoom = setInitialZoom()
 
     watch(() => store.getters.getRadius, function() {
         reactiveRadius.value = store.getters['getRadius']
@@ -30,7 +43,7 @@ onMounted(() => {
         addMarkers(reactiveRadius.value)
     });
 
-    let map = L.map('map', {editable: false}).setView(centerHome, 8);
+    let map = L.map('map', {editable: false}).setView(centerHome, initialZoom);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18,
