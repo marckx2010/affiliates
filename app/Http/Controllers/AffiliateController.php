@@ -20,6 +20,14 @@ class AffiliateController extends Controller
         $affiliate = new Affiliate();
         $affiliates = $affiliate->readFile();
 
+        // if error send some contextual info to the error handler
+        if (1 ) {
+            dd($_SERVER);
+            return Inertia::render('Errors/ErrorHandler', [
+                'resources' => 'Nope',
+            ])->toResponse($request)->setStatusCode(HttpResponse::HTTP_BAD_REQUEST);
+        }
+
 
         // if error send some contextual info to the error handler
         if (!$affiliates) {

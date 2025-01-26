@@ -59,6 +59,8 @@ onMounted(() => {
         style: {opacity: 0.8, borderRadius: '0px', backgroundColor: 'lightblue'}
     }).addTo(map);
 
+    //console.log(centerHome);
+
     // home marker
     L.marker(centerHome, {
         icon: L.divIcon({
@@ -76,6 +78,7 @@ onMounted(() => {
                 popupText += '&nbsp;<img alt="lucky shamrock" src=' + shamrock + ' style="width: 20px; height: 20px;">' + '&nbsp;'
             }
             popupText += entry.distance + ' km'
+            //console.log("latLng", entry.latLng)
             L.marker(entry.latLng).addTo(map)
                 .bindPopup(popupText);
         });

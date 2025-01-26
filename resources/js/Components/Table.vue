@@ -12,7 +12,7 @@ const props = defineProps({
 <template>
     <div>
         <div class="display-6 jumbotron mt-2">Invitees</div>
-        <table id="tableComponent" class="table table-bordered table-striped">
+        <table id="tableComponent" class="table table-bordered table-striped" fields="">
             <thead>
             <tr class="bg-success">
                 <!-- loop through each value of the fields to get the table header -->

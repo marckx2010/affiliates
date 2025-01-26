@@ -6,6 +6,7 @@ import Karta from '@/Components/Karta.vue'
 import Table from "@/Components/Table.vue";
 import {useStore} from "vuex";
 import InviteRadius from "@/Pages/Invitations/InviteRadius.vue";
+import Timer from "@/Pages/Timer/Timer.vue";
 
 // const props = defineProps({})
 
@@ -53,11 +54,6 @@ const changeRadius = (newRadius) => {
     store.commit("setRadius", radius.value)
 }
 
-//const emit = defineEmits(['changed-radius']);
-//emit('changed-radius', 200)
-
-//myWindow.dispatchEvent('changed-radius', 20)
-
 </script>
 
 <template>
@@ -81,6 +77,8 @@ const changeRadius = (newRadius) => {
         </div>
 
         <Table :data=invitedAffiliates :fields=fields />
+
+        <Timer :min=0 :max=120 />
 
     </div>
 </template>

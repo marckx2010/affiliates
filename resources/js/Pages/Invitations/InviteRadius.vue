@@ -9,7 +9,6 @@ const props = defineProps({
 
 const emit = defineEmits(['changed-radius']);
 
-
 let radius = ref(props.radius)
 
 const cardTitle = 'Who shall we invite?';
@@ -18,7 +17,7 @@ const defaultRadius = 100
 const maxRadius = 200
 const tickStep = 50
 
-let thisModal = ref(null);
+let thisModal = ref(true);
 
 function showModal() {
     thisModal.value?.show()

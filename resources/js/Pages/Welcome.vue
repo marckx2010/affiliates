@@ -3,6 +3,7 @@ import type {PropType} from 'vue'
 import {computed} from 'vue'
 import {Head} from '@inertiajs/vue3'
 import Invitations from "@/Pages/Invitations/Invitations.vue";
+import Timer from "@/Pages/Timer/Timer.vue";
 import {useStore} from 'vuex'
 
 const props = defineProps({
@@ -51,6 +52,12 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.timer {
+    position: absolute;
+    bottom: -100px;
+    right: 20px;
+}
+
 html, body {
     height: 100%;
     background-color: #152733;
@@ -63,6 +70,10 @@ html, body {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding: 5px;
+}
+
+.notwelome {
+
 }
 
 @media (prefers-color-scheme: dark) {
