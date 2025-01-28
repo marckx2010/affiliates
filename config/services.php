@@ -31,4 +31,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'marckx' => [
+        'api_endpoint' => env('MARCKX_API_ENDPOINT'),
+    ]
 ];

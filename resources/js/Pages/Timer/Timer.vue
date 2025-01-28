@@ -5,7 +5,7 @@ import Modal from "@/Components/Modal.vue";
 import Range from "@/Components/Range.vue";
 
 const props = defineProps({
-    helloText: {type: String as PropType<string>, required: false, default: "Preview is timed"},
+    helloText: {type: String as PropType<string>, required: false, default: "Preview is timed due to high resource usage."},
     goodbyeText: {type: String as PropType<string>, required: false, default: "Thank you for previewing this application!"},
     min: {type: Number as PropType<number>, default: 0},
     max: {type: Number as PropType<number>, default: 100},
@@ -24,7 +24,7 @@ const rangeClass = ref("rangeGreen")
 
 let interval = setInterval(() => {
     if (secondsLeft.value >= 0) {
-        secondsLeft.value -= 20
+        secondsLeft.value -= 1
 
         rangeWidthPercent.value = (secondsLeft.value / max.value) * 100;
 

@@ -10,9 +10,7 @@ const props = defineProps({
     radius: {type: Number as PropType<number>, default: 100},
 });
 
-let map;
-
-let circle;
+let circle = L.circle({})
 
 let reactiveRadius = ref(props.radius)
 
@@ -68,9 +66,10 @@ onMounted(() => {
             popupAnchor: [20, 10]
         })
     }).addTo(map)
-        .bindPopup('<img alt="mini logo" src=' + miniLogo + ' style="background-color: pink; padding: 2px; height: 30px"><br/>Home office of<br/> And And! And in Limerick!');
+        .bindPopup('<img alt="mini logo" src=' + miniLogo + ' style="background-color: pink; padding: 2px; height: 30px">' +
+            '<br/>Home office of<br/> And And! And in Limerick!');
 
-    function addMarkers(radius) {
+    function addMarkers(radius: number) {
         // a marker for everyone
         affiliates.forEach(entry => {
             let popupText = entry.name + '<br>'
@@ -85,7 +84,7 @@ onMounted(() => {
     }
     addMarkers(props.radius)
 
-    function drawCircle(radius) {
+    function drawCircle(radius: number) {
         // the lucky inside circle
         circle = L.circle(centerHome, {
             color: 'green',
