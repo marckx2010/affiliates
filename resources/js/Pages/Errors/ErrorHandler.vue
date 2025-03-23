@@ -13,7 +13,6 @@ const row = props.row
 </script>
 
 <template>
-
 <div v-if="resources">
     <h1>Sorry!</h1>
     <h2>Due to limited resources the Affiliates sample application may only be used once per 24 hours.</h2>

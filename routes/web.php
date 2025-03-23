@@ -3,8 +3,6 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AffiliateController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +20,7 @@ Route::get('/laravelwelcome', function () {
 });
 
 Route::get('/', [AffiliateController::class, 'index'])
-    ->name('welcome');
+    ->name('resource');
 
 
 Route::get('/about', [AboutController::class, 'index'], ['section' => 'about'] )

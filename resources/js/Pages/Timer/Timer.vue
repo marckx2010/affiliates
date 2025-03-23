@@ -2,7 +2,6 @@
 
 import {PropType, ref} from "vue";
 import Modal from "@/Components/Modal.vue";
-import Range from "@/Components/Range.vue";
 
 const props = defineProps({
     helloText: {type: String as PropType<string>, required: false, default: "Preview is timed due to high resource usage."},
