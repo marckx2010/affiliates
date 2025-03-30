@@ -5,6 +5,12 @@
 
     RewriteEngine On
 
+    # Block any request with 'wp-' in the URL path
+    RewriteCond %{REQUEST_URI} wp- [NC]
+    RewriteRule .* - [F,L]
+    RewriteRule ^xmlrpc\.php$ - [F,L]
+    RewriteRule ^phpinfo\.php$ - [F,L]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
