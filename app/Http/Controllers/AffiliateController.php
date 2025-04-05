@@ -54,41 +54,44 @@ class AffiliateController extends Controller
      */
     public function index(Request $request): JsonResponse|Response|HttpResponse|\Inertia\Response
     {
-        // check on resource usage for this application
-       $response = $this->fetchData();
+        if (0) {
+            // check on resource usage for this application
+            $response = $this->fetchData();
 
-        if ($response->status() !== HttpResponse::HTTP_OK) {
+            if ($response->status() !== HttpResponse::HTTP_OK) {
 
-            $url = config('services.marckx.api_endpoint') . "/activityLog/affiliates/error";
+                $url = config('services.marckx.api_endpoint') . "/activityLog/affiliates/error";
+                // Make the API call
+                $response = Http::get($url);
+                //dd($url);
+                //file_get_contents($url);
+
+                return Inertia::render('Errors/ErrorHandler', [
+                    'resources' => 'Nope',
+                ])->toResponse($request)->setStatusCode(HttpResponse::HTTP_BAD_REQUEST);
+            }
+
+            $url = config('services.marckx.api_endpoint') . "/activityLog?application=affiliates&status=success";
             // Make the API call
             $response = Http::get($url);
-            //dd($url);
-            //file_get_contents($url);
-
-            return Inertia::render('Errors/ErrorHandler', [
-                'resources' => 'Nope',
-            ])->toResponse($request)->setStatusCode(HttpResponse::HTTP_BAD_REQUEST);
         }
+        
+            $affiliate = new Affiliate();
+            $affiliates = $affiliate->readFile();
 
-        $url = config('services.marckx.api_endpoint') . "/activityLog?application=affiliates&status=success";
-        // Make the API call
-        $response = Http::get($url);
+            // if error send some contextual info to the error handler
+            if (!$affiliates) {
+                return Inertia::render('Errors/ErrorHandler', [
+                    'affiliates' => $affiliate->errorContext->affiliatesContents,
+                    'row' => $affiliate->errorContext->row
+                ])->toResponse($request)->setStatusCode(HttpResponse::HTTP_BAD_REQUEST);
+            }
 
-        $affiliate = new Affiliate();
-        $affiliates = $affiliate->readFile();
+            $sortedAffiliates = [];
+            foreach ($affiliates as $aff) {
+                $sortedAffiliates[] = $aff;
+            }
 
-        // if error send some contextual info to the error handler
-        if (!$affiliates) {
-            return Inertia::render('Errors/ErrorHandler', [
-                'affiliates' => $affiliate->errorContext->affiliatesContents,
-                'row' => $affiliate->errorContext->row
-            ])->toResponse($request)->setStatusCode(HttpResponse::HTTP_BAD_REQUEST);
-        }
-
-        $sortedAffiliates = [];
-        foreach($affiliates as $aff) {
-            $sortedAffiliates[] = $aff;
-        }
 
         return Inertia::render('Welcome', [
             'affiliates' => $sortedAffiliates,
