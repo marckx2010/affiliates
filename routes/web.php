@@ -22,6 +22,5 @@ Route::get('/laravelwelcome', function () {
 Route::get('/', [AffiliateController::class, 'index'])
     ->name('resource');
 
-
 Route::get('/about', [AboutController::class, 'index'], ['section' => 'about'] )
     ->name('about');

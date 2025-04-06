@@ -13,11 +13,56 @@ use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class AffiliateController extends Controller
 {
-    private function fetchData(): JsonResponse
+    /**
+     * @param Request $request
+     * @return JsonResponse|Response|HttpResponse|\Inertia\Response
+     */
+    public function index(Request $request): JsonResponse|Response|HttpResponse|\Inertia\Response
+    {
+        $ip = $request->ip();
+        $ipNumber = ip2long($ip);
+
+        // check on resource usage for this application
+        $response = $this->fetchData($ipNumber);
+
+        if ($response->status() !== HttpResponse::HTTP_OK) {
+
+            $url = config('services.marckx.api_endpoint') . "/activityLog/affiliates/error";
+            // Make the API call
+            $response = Http::get($url);
+
+            return Inertia::render('Errors/ErrorHandler', [
+                'resources' => 'Nope',
+            ])->toResponse($request)->setStatusCode(HttpResponse::HTTP_BAD_REQUEST);
+        }
+
+        $affiliate = new Affiliate();
+        $affiliates = $affiliate->readFile();
+
+        // if error send some contextual info to the error handler
+        if (!$affiliates) {
+            return Inertia::render('Errors/ErrorHandler', [
+                'affiliates' => $affiliate->errorContext->affiliatesContents,
+                'row' => $affiliate->errorContext->row
+            ])->toResponse($request)->setStatusCode(HttpResponse::HTTP_BAD_REQUEST);
+        }
+
+        $sortedAffiliates = [];
+        foreach ($affiliates as $aff) {
+            $sortedAffiliates[] = $aff;
+        }
+
+        return Inertia::render('Welcome', [
+            'affiliates' => $sortedAffiliates,
+            'homeOfficeLatLng' => $affiliate->homeOfficeLatLng
+        ]);
+    }
+
+    private function fetchData(int $ipNumber): JsonResponse
     {
         try {
             // Replace with your API endpoint
-            $url = config('services.marckx.api_endpoint') . "/checkresourcelimit?application=affiliates";
+            $url = config('services.marckx.api_endpoint') . "/resource/affiliates/$ipNumber?status=good";
 
             // Make the API call
             $response = Http::get($url);
@@ -46,56 +91,5 @@ class AffiliateController extends Controller
                 'message' => $e->getMessage(),
             ], 500);
         }
-    }
-
-    /**
-     * @param Request $request
-     * @return JsonResponse|Response|HttpResponse|\Inertia\Response
-     */
-    public function index(Request $request): JsonResponse|Response|HttpResponse|\Inertia\Response
-    {
-        if (0) {
-            // check on resource usage for this application
-            $response = $this->fetchData();
-
-            if ($response->status() !== HttpResponse::HTTP_OK) {
-
-                $url = config('services.marckx.api_endpoint') . "/activityLog/affiliates/error";
-                // Make the API call
-                $response = Http::get($url);
-                //dd($url);
-                //file_get_contents($url);
-
-                return Inertia::render('Errors/ErrorHandler', [
-                    'resources' => 'Nope',
-                ])->toResponse($request)->setStatusCode(HttpResponse::HTTP_BAD_REQUEST);
-            }
-
-            $url = config('services.marckx.api_endpoint') . "/activityLog?application=affiliates&status=success";
-            // Make the API call
-            $response = Http::get($url);
-        }
-        
-            $affiliate = new Affiliate();
-            $affiliates = $affiliate->readFile();
-
-            // if error send some contextual info to the error handler
-            if (!$affiliates) {
-                return Inertia::render('Errors/ErrorHandler', [
-                    'affiliates' => $affiliate->errorContext->affiliatesContents,
-                    'row' => $affiliate->errorContext->row
-                ])->toResponse($request)->setStatusCode(HttpResponse::HTTP_BAD_REQUEST);
-            }
-
-            $sortedAffiliates = [];
-            foreach ($affiliates as $aff) {
-                $sortedAffiliates[] = $aff;
-            }
-
-
-        return Inertia::render('Welcome', [
-            'affiliates' => $sortedAffiliates,
-            'homeOfficeLatLng' => $affiliate->homeOfficeLatLng
-        ]);
     }
 }
